@@ -1,0 +1,27 @@
+module shift4mod(In, L, w, Clock, Q); 
+input [3:0] In;
+input L, w, Clock;
+output [3:0] Q;
+reg [3:0] Q;
+always @(posedge Clock)
+if (L)
+Q <= In;
+else
+begin
+Q[0] <= Q[1];
+Q[1] <= Q[2];
+Q[2] <= Q[3];
+Q[3] <= w;
+end
+endmodule
+
+//This code is for the testbench
+
+Initial begin
+Clock = 0 ; In = 0
+#100; w=1; Clock=1; #100; Clock=0
+#100; w=1; Clock=1; #100; Clock=0
+#100; w=1; Clock=1; #100; Clock=0
+#100; w=0; Clock=1; #100; Clock=0
+
+End
